@@ -10,7 +10,8 @@ The program uses no network and writes exactly the same bytes on every run.
 
 The picture: a premium ramen bowl with rich broth, seared chashu, ajitama
 eggs with runny yolks, chili oil and gentle steam, shot in warm dramatic
-light on a dark wooden table.
+light on dark slate, composed with generous negative space so the dish
+stays readable at any size.
 
 Run it the way the grader does:
 
