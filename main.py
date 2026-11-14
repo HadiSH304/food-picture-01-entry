@@ -13,4 +13,9 @@ from pathlib import Path
 source = Path(__file__).parent / "entry.png"
 output_dir = Path(os.environ.get("MAKEFUN_OUTPUT_DIR", "/output"))
 output_dir.mkdir(parents=True, exist_ok=True)
-shutil.copyfile(source, output_dir / "entry.png")
+written = Path(shutil.copyfile(source, output_dir / "entry.png"))
+
+# Verify the copy landed whole: the written file must match the source size,
+# so a truncated write fails loudly instead of entering a broken picture.
+if written.stat().st_size != source.stat().st_size:
+    raise SystemExit(f"copy incomplete: {written} differs from {source}")
