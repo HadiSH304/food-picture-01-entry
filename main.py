@@ -1,4 +1,6 @@
 # food-picture-01 entry (Python 3.13, standard library only).
+# The picture: "Tonkotsu, Pulled High" — a tall glossy noodle pull over a
+# black speckled bowl, molten yolk dripping, torched chashu, steam.
 # The picture is the entry.png beside this file (a JPEG by its first bytes;
 # the name entry.png is required either way). This program copies it to
 # /output/entry.png, byte for byte, so two runs always write the same bytes.
