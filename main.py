@@ -8,6 +8,7 @@
 # Outside the grader's container, MAKEFUN_OUTPUT_DIR stands in for /output:
 #   mkdir -p out && MAKEFUN_OUTPUT_DIR=out python3 main.py
 
+import hashlib
 import os
 import shutil
 from pathlib import Path
@@ -17,7 +18,13 @@ output_dir = Path(os.environ.get("MAKEFUN_OUTPUT_DIR", "/output"))
 output_dir.mkdir(parents=True, exist_ok=True)
 written = Path(shutil.copyfile(source, output_dir / "entry.png"))
 
-# Verify the copy landed whole: the written file must match the source size,
-# so a truncated write fails loudly instead of entering a broken picture.
-if written.stat().st_size != source.stat().st_size:
+
+def digest(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+# Verify the copy landed whole: the written file must hash to the same
+# SHA-256 as the source, so a truncated or altered write fails loudly
+# instead of entering a broken picture.
+if digest(written) != digest(source):
     raise SystemExit(f"copy incomplete: {written} differs from {source}")
